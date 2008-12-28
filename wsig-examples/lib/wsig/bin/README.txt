@@ -1,0 +1,1 @@
+These scripts don't work (fix classpath).  
