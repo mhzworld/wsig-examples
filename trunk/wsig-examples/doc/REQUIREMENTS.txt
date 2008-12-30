@@ -1,0 +1,22 @@
+
+REQUIREMENTS
+============
+
+  * Java Run Time Environment version 1.5 (tested with 1.6)
+  * Eclipse 3.4+ - http://www.eclipse.org
+      * Eclipse Web Tools Project (WTP) 3.0.3+
+      * Java EE Developer Tools minimum installation
+      * Subclipse 1.4.7+ - http://subclipse.tigris.org
+  * Apache Tomcat 5.5 - http://tomcat.apache.org
+
+
+DISTRIBUTION
+============
+
+  * JADE v3.6.1 - http://jade.tilab.com
+  * WSIG v2.1 - http://jade.tilab.com/community-addons.php
+
+INSTALLATION
+============
+
+See HOW-TO.en.txt to follow a simple installation procedure.
