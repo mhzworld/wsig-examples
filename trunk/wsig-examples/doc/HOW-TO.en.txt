@@ -1,0 +1,152 @@
+
+HOW TO INSTALL AND RUN WSIG-EXAMPLES IN 5 STEPS
+
+
+Author : Sebastien Heymann <sebastien.heymann@tremplin-utc.net>
+Date : 2008-29-12
+
+Human requirements :
+  * Be familiar with Eclipse IDE
+  * Be familiar with Jade
+  * Knowing how to install and set up Tomcat (out of consideration here)
+
+Notes :
+  * This document is about the setting of a development environment for WSIG, 
+    do not use it in production mode.
+  * The tutorial is based on the WSIG guide (v2.1), especially the MathAgent example.
+
+
+======================================
+STEP 1 - INSTALLING TOMCAT AND ECLIPSE 
+======================================
+
+First begin by installing Tomcat. It is available in repositories for Ubuntu. 
+In this system, do not forget to remove the autostart daemon by the following 
+command line :
+
+sudo update-rc.d -f tomcat5.5 remove
+
+Install the Eclipse you want (http://www.eclipse.org/downloads/). We use the 
+Classic distribution in this tutorial. Create an empty workspace dedicated to 
+the projet, and restart Eclipse to use it. Go to "Help > Software Updates", 
+then add http://download.eclipse.org/webtools/updates in sites. Install Java EE 
+Developer Tools (in Eclipse Web Tools Project (WTP) 3.0.3). Note that Axis is 
+not required because WSIG distribution contains it. Finally add the site 
+http://subclipse.tigris.org/update_1.4.x, and download Subclipse, an integrated 
+SVN tool.
+
+
+============================
+STEP 2 - GETTING THE PROJECT
+============================
+
+Clic on "File > New > Other... > SVN > Checkout Projects from SVN", and 
+"create a new repository location", then add https://wsig-examples.googlecode.com/svn/trunk/. 
+Select "wsig-examples-read-only" and finish.
+
+Once the repository content downloaded and the workspace automatically updated, 
+Eclipse declares an error :
+"Target runtime Apache Tomcat v5.5 is not defined. wsig-examples Unknown Faceted Project Problem"
+
+This is normal at this stage, we will define a server in step 4.
+
+
+=================================
+STEP 3 - JADE PLATFORM AND AGENTS
+=================================
+
+Create and start the following Debug Configurations as "Java Application" :
+runJadePlatform :
+Project = wsig-examples
+Main class = jade.Boot
+Program arguments = -gui
+Clic on "Debug" to launch the Jade plateform.
+
+runMathAgent :
+Project = wsig-examples
+Main class = jade.Boot
+Program arguments = -gui -container "MathAgent1:com.tilab.wsig.examples.MathAgent(MathFunctions false)" -name "WSIGTestPlatform"
+Clic on "Debug" to launch the MathAgent1 agent, instance of MathFunctions.
+
+runMathAgentPrefix :
+Project = wsig-examples
+Main class = jade.Boot
+Program arguments = -gui -container "MathAgent2:com.tilab.wsig.examples.MathAgent(MathFunctions false second)" -name "WSIGTestPlatform"
+Clic on "Debug" to launch the MathAgent2 agent, instance of MathFunctions.
+
+runMathAgentMapper :
+Project = wsig-examples
+Main class = jade.Boot
+Program arguments = -gui -container "MathAgent3:com.tilab.wsig.examples.MathAgent(MathFunctionsMapper true)" -name "WSIGTestPlatform"
+Clic on "Debug" to launch the MathAgent3 agent, instance of MathFunctionsMapper.
+
+
+In the futur, agents will be directly launchable through the toolbar : 
+Debug > runJadePlatform
+Debug > runMathAgent
+Debug > runMathAgentPrefix
+Debug > runMathAgentMapper
+
+The Jade Platform GUI must have appeared. You can now see the 3 agents evolving 
+in 3 different containers. These agents are independant from each other.
+
+
+==========================
+STEP 4 - ADDING THE SERVER
+==========================
+
+Switch on JavaEE perspective. Select the wsig-examples project and create the 
+application's Debug Configuration (Debug As > Debug on server) : choose 
+"Manually define a new server" of type "Apache > Tomcat v5.5 Server", tick 
+"Always use this server when running this project", and clic Next. Fill in the 
+installation path of Tomcat, "/usr/share/tomcat5.5" on Ubuntu 7.10, and clic 
+Next. Add wsig-examples to the projects configured for this server, and finish.
+
+In projects view, a new project appeared : "Servers". It contains a directory 
+with Tomcat configuration files inside (the XML files). To know the listened 
+port by the server, open server.xml. This is my default configuration :
+
+<!-- Define a non-SSL HTTP/1.1 Connector on port 8180 -->
+<Connector acceptCount="100" connectionTimeout="20000" disableUploadTimeout="true" 
+enableLookups="false" maxHttpHeaderSize="8192" maxSpareThreads="75" maxThreads="150" 
+minSpareThreads="25" port="8180" redirectPort="8443"/>
+...
+<!-- Define an AJP 1.3 Connector on port 8009 -->
+<Connector enableLookups="false" port="8009" protocol="AJP/1.3" redirectPort="8443"/>
+
+If you change the ports, modifications will be synchronized immediately. 
+
+The wsig-examples application is declared at the end of the file :
+
+<Context docBase="wsig-examples" path="/wsig-examples" reloadable="true" 
+source="org.eclipse.jst.j2ee.server:wsig-examples"/></Host>
+
+Value of "reloadable" let the propagation of modifications on the server 
+automatically, which is very usefull to test source code on the fly. Without 
+this mecanism, you would have to package the application in a war archive and 
+deploy it on the server each time you want to test it.
+
+
+===========================
+STEP 5 - DEPLOYMENT AND USE
+===========================
+
+The server start immediatly after having been added, and deploy the application.
+The ControlWSIG agent is then created inside WSIG-Container. The WSIG console
+is available on http://localhost:8180/wsig-examples/ with your favorite browser.
+The web services corresponding to our agents are listed in Home page, in WSIG Services List.
+Go to the Test page to execute the sample requests proposed in package 
+src/com.tilab.wsig.examples.xml : copy the XML content to test in "SOAP request". 
+Send the request, and that's it !
+
+If the server reply the web service doesn't exist ("Service xxx not present in 
+wsig"), check that the corresponding agent is started.
+If you deactivate the ControlWSIG agent through the web console and reactivate it, 
+other agents would have been stopped. Start them again (without stopping the 
+server), and refresh the Home page to see them again in the list.
+
+To stop everything properly, right clic on the server name and stop it. Then 
+stop Jade through the GUI by clic on "File > Shut down Agent Platform".
+
+
+
