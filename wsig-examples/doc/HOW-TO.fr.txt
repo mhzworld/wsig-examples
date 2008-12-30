@@ -11,7 +11,8 @@ Pré-requis :
   * Savoir utiliser Jade
 
 Notes :
-  * Ce document traite de la mise en place d'un environnement de développement, il ne doit pas être utilisé en production.
+  * Ce document traite de la mise en place d'un environnement de développement, 
+    il ne doit pas être utilisé en production.
   * Ce tutoriel repose sur le guide de WSIG (v2.1), notamment pour l'exemple MathAgent.
 
 
@@ -19,21 +20,34 @@ Notes :
 ETAPE 1 - INSTALLATION DE TOMCAT ET ECLIPSE
 ===========================================
 
-Commencez tout d'abord par installer Tomcat 5.5. Sur Ubuntu, il est disponible dans les dépôts. Pensez à désactiver son démarrage automatique via la commande
+Commencez tout d'abord par installer Tomcat 5.5.
+Sur Ubuntu, il est disponible dans les dépôts.
+Pensez à désactiver son démarrage automatique via la commande
 
 sudo update-rc.d -f tomcat5.5 remove
 
-Créez ensuite un workspace vide dans Eclipse qui restera dédié au projet, et redémarrez dedans. Allez dans "Help > Software Updates", puis ajoutez le site http://download.eclipse.org/webtools/updates. Installez Java EE Developer Tools (dans Eclipse Web Tools Project (WTP) 3.0.3). Notez qu'Axis n'est pas nécessaire car il est fourni dans la distribution de WSIG. Ajoutez enfin le site http://subclipse.tigris.org/update_1.4.x, et téléchargez Subclipse, qui vous permettra d'avoir la gestion du SVN intégré.
+Installez l'Eclipse que vous voulez (http://www.eclipse.org/downloads/). Nous 
+utilisons la distribution Classic distribution dans ce tutoriel.
+Créez ensuite un workspace vide dans Eclipse qui restera dédié au projet, et 
+redémarrez dedans. Allez dans "Help > Software Updates", puis ajoutez le site 
+http://download.eclipse.org/webtools/updates.
+Installez Java EE Developer Tools (dans Eclipse Web Tools Project (WTP) 3.0.3).
+Notez qu'Axis n'est pas nécessaire car il est fourni dans la distribution de WSIG.
+Ajoutez enfin le site http://subclipse.tigris.org/update_1.4.x, et téléchargez 
+Subclipse, qui vous permettra d'avoir la gestion du SVN intégré.
 
 
 ================================
 ETAPE 2 - RECUPERATION DU PROJET
 ================================
 
-Faites ensuite "File > New > Other... > SVN > Checkout Projects from SVN", puis "create a new repository location", puis ajoutez https://wsig-examples.googlecode.com/svn/trunk/. Sélectionnez "wsig-examples-read-only" et terminez.
+Faites ensuite "File > New > Other... > SVN > Checkout Projects from SVN", puis
+"create a new repository location", puis ajoutez https://wsig-examples.googlecode.com/svn/trunk/. 
+Sélectionnez "wsig-examples-read-only" et terminez.
 
-Une fois le contenu du dépôt téléchargé et le workspace mis à jour (automatiquement), Eclipse déclare une erreur :
-"Target runtime Apache Tomcat v5.5 is not defined.	wsig-examples		Unknown	Faceted Project Problem"
+Une fois le contenu du dépôt téléchargé et le workspace mis à jour automatiquement, 
+Eclipse déclare une erreur :
+"Target runtime Apache Tomcat v5.5 is not defined. wsig-examples Unknown Faceted Project Problem"
 
 C'est normal à ce stade, nous définierons un serveur à l'étape 4.
 
@@ -42,7 +56,7 @@ C'est normal à ce stade, nous définierons un serveur à l'étape 4.
 ETAPE 3 - PLATEFORME JADE ET AGENTS
 ===================================
 
-Créez et démarrez ensuite les Debug Configurations suivantes en tant que Java Application :
+Créez et démarrez ensuite les Debug Configurations suivantes en tant que "Java Application" :
 runJadePlatform :
 Project = wsig-examples
 Main class = jade.Boot
@@ -74,19 +88,32 @@ Debug > runMathAgent
 Debug > runMathAgentPrefix
 Debug > runMathAgentMapper
 
-L'interface graphique de Jade Platform a dû apparaître, et vous pouvez voir les 3 agents évoluant dans 3 conteneurs différents. Ces agents peuvent être lancés indépendamment les uns les autres.
+L'interface graphique de Jade Platform a dû apparaître, et vous pouvez voir les
+3 agents évoluant dans 3 conteneurs différents. Ces agents peuvent être lancés 
+indépendamment les uns les autres.
 
 
 ==========================
 ETAPE 4 - AJOUT DU SERVEUR
 ==========================
 
-Passez en perspective JavaEE. Sélectionnez le projet wsig-examples et créez le Debug Configuration de l'application (Debug As > Debug on server) : choisissez "Manually define a new server" de type "Apache > Tomcat v5.5 Server", cochez la case "Always use this server when running this project", et faites Next. Renseignez le chemin d'installation de Tomcat, "/usr/share/tomcat5.5" sous Ubuntu 7.10, et faites Next. Ajoutez le projet wsig-examples aux projets configurés pour le serveur, et terminez.
+Passez en perspective JavaEE. Sélectionnez le projet wsig-examples et créez le 
+Debug Configuration de l'application (Debug As > Debug on server) : choisissez 
+"Manually define a new server" de type "Apache > Tomcat v5.5 Server", cochez la 
+case "Always use this server when running this project", et faites Next. 
+Renseignez le chemin d'installation de Tomcat, "/usr/share/tomcat5.5" sous 
+Ubuntu 7.10, et faites Next. Ajoutez le projet wsig-examples aux projets configurés 
+pour le serveur, et terminez.
 
-Dans la vue des projets, un nouveau projet est apparu : "Servers". Il contient un dossier comprenant les fichiers de configuration de Tomcat (les fichiers XML). Pour savoir quels ports écoute le serveur, ouvrez server.xml. Par exemple, ma configuration par défaut est la suivante :
+Dans la vue des projets, un nouveau projet est apparu : "Servers". Il contient 
+un dossier comprenant les fichiers de configuration de Tomcat (les fichiers XML). 
+Pour savoir quels ports écoute le serveur, ouvrez server.xml. Par exemple, ma 
+configuration par défaut est la suivante :
 
 <!-- Define a non-SSL HTTP/1.1 Connector on port 8180 -->
-<Connector acceptCount="100" connectionTimeout="20000" disableUploadTimeout="true" enableLookups="false" maxHttpHeaderSize="8192" maxSpareThreads="75" maxThreads="150" minSpareThreads="25" port="8180" redirectPort="8443"/>
+<Connector acceptCount="100" connectionTimeout="20000" disableUploadTimeout="true" 
+enableLookups="false" maxHttpHeaderSize="8192" maxSpareThreads="75" maxThreads="150" 
+minSpareThreads="25" port="8180" redirectPort="8443"/>
 ...
 <!-- Define an AJP 1.3 Connector on port 8009 -->
 <Connector enableLookups="false" port="8009" protocol="AJP/1.3" redirectPort="8443"/>
@@ -95,21 +122,37 @@ Vous pouvez changer les ports, les changements seront pris en compte immédiatem
 
 L'application wsig-examples est déclarée vers la fin du fichier :
 
-<Context docBase="wsig-examples" path="/wsig-examples" reloadable="true" source="org.eclipse.jst.j2ee.server:wsig-examples"/></Host>
+<Context docBase="wsig-examples" path="/wsig-examples" reloadable="true" 
+source="org.eclipse.jst.j2ee.server:wsig-examples"/></Host>
 
-La valeur de "reloadable" permet ici de propager les modifications immédiatement sur le serveur, ce qui est très pratique pour éditer et tester du code à la volée. Sans ce mécanisme, il faudrait packager l'application dans une archive war et la déployer sur le serveur à chaque fois.
+La valeur de "reloadable" permet ici de propager les modifications immédiatement 
+sur le serveur, ce qui est très pratique pour éditer et tester du code à la volée. 
+Sans ce mécanisme, il faudrait packager l'application dans une archive war et 
+la déployer sur le serveur à chaque fois.
 
 
 ====================================
 ETAPE 5 - DEPLOYEMENT ET UTILISATION
 ====================================
 
-Le serveur démarre immédiatement en déployant l'application après avoir été ajouté. L'agent ControlWSIG est alors créé dans WSIG-Container. La console de WSIG apparaît à l'adresse http://localhost:8180/wsig-examples/, que vous pouvez aussi ouvrir dans votre navigateur web habituel. Les web services correspondants à nos agents sont listés sur la page Home dans WSIG Services List. Allez sur la page Test pour faire fonctionner les exemples du package src/com.tilab.wsig.examples.xml : le contenu du fichier XML à tester est à copier dans "SOAP request". Il ne vous reste plus qu'à envoyer la requête !
+Le serveur démarre immédiatement en déployant l'application après avoir été ajouté. 
+L'agent ControlWSIG est alors créé dans WSIG-Container. La console de WSIG apparaît 
+à l'adresse http://localhost:8180/wsig-examples/, que vous pouvez aussi ouvrir dans 
+votre navigateur web habituel. Les web services correspondants à nos agents sont 
+listés sur la page Home dans WSIG Services List. Allez sur la page Test pour faire 
+fonctionner les exemples du package src/com.tilab.wsig.examples.xml : le contenu 
+du fichier XML à tester est à copier dans "SOAP request". Il ne vous reste plus 
+qu'à envoyer la requête !
 
-Si le serveur répond que le web service n'existe pas ("Service xxx not present in wsig"), vérifiez bien que l'agent correspondant est démarré.
-Si vous désactivez l'agent ControlWSIG via l'interface web et le réactivez, les autres agents auront été arrêtés. Lancez-les de nouveau (sans arrêter le serveur), et rafraîchissez la page Home pour les voir de nouveau dans la liste.
+Si le serveur répond que le web service n'existe pas ("Service xxx not present 
+in wsig"), vérifiez bien que l'agent correspondant est démarré.
+Si vous désactivez l'agent ControlWSIG via l'interface web et le réactivez, les 
+autres agents auront été arrêtés. Lancez-les de nouveau (sans arrêter le serveur), 
+et rafraîchissez la page Home pour les voir de nouveau dans la liste.
 
-Pour tout arrêter proprement, cliquez droit sur le nom du serveur, puis faites Stop. Puis arrêtez Jade via l'interface graphique en faisant "File > Shut down Agent Platform".
+Pour tout arrêter proprement, cliquez droit sur le nom du serveur, puis faites 
+Stop. Puis arrêtez Jade via l'interface graphique en faisant 
+"File > Shut down Agent Platform".
 
 
 
