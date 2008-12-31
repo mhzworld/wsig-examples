@@ -6,7 +6,7 @@ Author : Sebastien Heymann <sebastien.heymann@tremplin-utc.net>
 Date : 2008-29-12
 
 Pré-requis :
-  * Savoir utiliser l'IDE Eclipse
+  * Savoir utiliser l'IDE Eclipse est fortement conseillé mais pas indispensable
   * Savoir installer et configurer Tomcat (non traité ici car hors de propos)
   * Savoir utiliser Jade
 
@@ -21,13 +21,13 @@ ETAPE 1 - INSTALLATION DE TOMCAT ET ECLIPSE
 ===========================================
 
 Commencez tout d'abord par installer Tomcat 5.5.
-Sur Ubuntu, il est disponible dans les dépôts.
+Sur Ubuntu, il est disponible dans les dépôts officiels.
 Pensez à désactiver son démarrage automatique via la commande
 
 sudo update-rc.d -f tomcat5.5 remove
 
 Installez l'Eclipse que vous voulez (http://www.eclipse.org/downloads/). Nous 
-utilisons la distribution Classic distribution dans ce tutoriel.
+utilisons la distribution Classic dans ce tutoriel.
 Créez ensuite un workspace vide dans Eclipse qui restera dédié au projet, et 
 redémarrez dedans. Allez dans "Help > Software Updates", puis ajoutez le site 
 http://download.eclipse.org/webtools/updates.
@@ -49,7 +49,7 @@ Une fois le contenu du dépôt téléchargé et le workspace mis à jour automat
 Eclipse déclare une erreur :
 "Target runtime Apache Tomcat v5.5 is not defined. wsig-examples Unknown Faceted Project Problem"
 
-C'est normal à ce stade, nous définierons un serveur à l'étape 4.
+C'est normal à ce stade, nous définirons un serveur à l'étape 4.
 
 
 ===================================
@@ -90,7 +90,7 @@ Debug > runMathAgentMapper
 
 L'interface graphique de Jade Platform a dû apparaître, et vous pouvez voir les
 3 agents évoluant dans 3 conteneurs différents. Ces agents peuvent être lancés 
-indépendamment les uns les autres.
+indépendamment les uns des autres.
 
 
 ==========================
