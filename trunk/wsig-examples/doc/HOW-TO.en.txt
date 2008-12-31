@@ -20,7 +20,7 @@ Notes :
 STEP 1 - INSTALLING TOMCAT AND ECLIPSE 
 ======================================
 
-First begin by installing Tomcat. It is available in repositories for Ubuntu. 
+First begin by installing Tomcat. It is available in official repositories for Ubuntu. 
 In this system, do not forget to remove the autostart daemon by the following 
 command line :
 
@@ -28,7 +28,7 @@ sudo update-rc.d -f tomcat5.5 remove
 
 Install the Eclipse you want (http://www.eclipse.org/downloads/). We use the 
 Classic distribution in this tutorial. Create an empty workspace dedicated to 
-the projet, and restart Eclipse to use it. Go to "Help > Software Updates", 
+the project, and restart Eclipse to use it. Go to "Help > Software Updates", 
 then add http://download.eclipse.org/webtools/updates in sites. Install Java EE 
 Developer Tools (in Eclipse Web Tools Project (WTP) 3.0.3). Note that Axis is 
 not required because WSIG distribution contains it. Finally add the site 
@@ -60,7 +60,7 @@ runJadePlatform :
 Project = wsig-examples
 Main class = jade.Boot
 Program arguments = -gui
-Clic on "Debug" to launch the Jade plateform.
+Clic on "Debug" to launch the Jade platform.
 
 runMathAgent :
 Project = wsig-examples
@@ -88,7 +88,7 @@ Debug > runMathAgentPrefix
 Debug > runMathAgentMapper
 
 The Jade Platform GUI must have appeared. You can now see the 3 agents evolving 
-in 3 different containers. These agents are independant from each other.
+in 3 different containers. These agents are independent from each other.
 
 
 ==========================
@@ -122,8 +122,8 @@ The wsig-examples application is declared at the end of the file :
 source="org.eclipse.jst.j2ee.server:wsig-examples"/></Host>
 
 Value of "reloadable" let the propagation of modifications on the server 
-automatically, which is very usefull to test source code on the fly. Without 
-this mecanism, you would have to package the application in a war archive and 
+automatically, which is very useful to test source code on the fly. Without 
+this mechanism, you would have to package the application in a war archive and 
 deploy it on the server each time you want to test it.
 
 
@@ -131,7 +131,7 @@ deploy it on the server each time you want to test it.
 STEP 5 - DEPLOYMENT AND USE
 ===========================
 
-The server start immediatly after having been added, and deploy the application.
+The server start immediately after having been added, and deploy the application.
 The ControlWSIG agent is then created inside WSIG-Container. The WSIG console
 is available on http://localhost:8180/wsig-examples/ with your favorite browser.
 The web services corresponding to our agents are listed in Home page, in WSIG Services List.
