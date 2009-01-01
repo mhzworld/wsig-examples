@@ -20,7 +20,7 @@ Notes :
 STEP 1 - INSTALLING TOMCAT AND ECLIPSE 
 ======================================
 
-First begin by installing Tomcat. It is available in official repositories for Ubuntu. 
+First install Tomcat. It is available in official repositories for Ubuntu. 
 In this system, do not forget to remove the autostart daemon by the following 
 command line :
 
@@ -40,8 +40,8 @@ SVN tool.
 STEP 2 - GETTING THE PROJECT
 ============================
 
-Clic on "File > New > Other... > SVN > Checkout Projects from SVN", and 
-"create a new repository location", then add https://wsig-examples.googlecode.com/svn/trunk/. 
+Click on "File > New > Other... > SVN > Checkout Projects from SVN", and 
+"create a new repository location", then add http://wsig-examples.googlecode.com/svn/trunk/. 
 Select "wsig-examples-read-only" and finish.
 
 Once the repository content downloaded and the workspace automatically updated, 
@@ -60,28 +60,28 @@ runJadePlatform :
 Project = wsig-examples
 Main class = jade.Boot
 Program arguments = -gui
-Clic on "Debug" to launch the Jade platform.
+Click on "Debug" to launch the Jade platform.
 
 runMathAgent :
 Project = wsig-examples
 Main class = jade.Boot
 Program arguments = -gui -container "MathAgent1:com.tilab.wsig.examples.MathAgent(MathFunctions false)" -name "WSIGTestPlatform"
-Clic on "Debug" to launch the MathAgent1 agent, instance of MathFunctions.
+Click on "Debug" to launch the MathAgent1 agent, instance of MathFunctions.
 
 runMathAgentPrefix :
 Project = wsig-examples
 Main class = jade.Boot
 Program arguments = -gui -container "MathAgent2:com.tilab.wsig.examples.MathAgent(MathFunctions false second)" -name "WSIGTestPlatform"
-Clic on "Debug" to launch the MathAgent2 agent, instance of MathFunctions.
+Click on "Debug" to launch the MathAgent2 agent, instance of MathFunctions.
 
 runMathAgentMapper :
 Project = wsig-examples
 Main class = jade.Boot
 Program arguments = -gui -container "MathAgent3:com.tilab.wsig.examples.MathAgent(MathFunctionsMapper true)" -name "WSIGTestPlatform"
-Clic on "Debug" to launch the MathAgent3 agent, instance of MathFunctionsMapper.
+Click on "Debug" to launch the MathAgent3 agent, instance of MathFunctionsMapper.
 
 
-In the futur, agents will be directly launchable through the toolbar : 
+In the future, agents will be directly launchable through the toolbar : 
 Debug > runJadePlatform
 Debug > runMathAgent
 Debug > runMathAgentPrefix
@@ -121,8 +121,8 @@ The wsig-examples application is declared at the end of the file :
 <Context docBase="wsig-examples" path="/wsig-examples" reloadable="true" 
 source="org.eclipse.jst.j2ee.server:wsig-examples"/></Host>
 
-Value of "reloadable" let the propagation of modifications on the server 
-automatically, which is very useful to test source code on the fly. Without 
+When "reloadable" is "true", the modifications are directly propagated on the 
+server, which is very useful to test source code on the fly. Without 
 this mechanism, you would have to package the application in a war archive and 
 deploy it on the server each time you want to test it.
 
@@ -131,7 +131,7 @@ deploy it on the server each time you want to test it.
 STEP 5 - DEPLOYMENT AND USE
 ===========================
 
-The server start immediately after having been added, and deploy the application.
+The server starts immediately after having been added, and deploys the application.
 The ControlWSIG agent is then created inside WSIG-Container. The WSIG console
 is available on http://localhost:8180/wsig-examples/ with your favorite browser.
 The web services corresponding to our agents are listed in Home page, in WSIG Services List.
@@ -139,14 +139,14 @@ Go to the Test page to execute the sample requests proposed in package
 src/com.tilab.wsig.examples.xml : copy the XML content to test in "SOAP request". 
 Send the request, and that's it !
 
-If the server reply the web service doesn't exist ("Service xxx not present in 
-wsig"), check that the corresponding agent is started.
+If the server replies that the web service doesn't exist ("Service xxx not present in 
+wsig"), you should check that the corresponding agent is started.
 If you deactivate the ControlWSIG agent through the web console and reactivate it, 
-other agents would have been stopped. Start them again (without stopping the 
+the other agents will be stopped. Start them again (without stopping the 
 server), and refresh the Home page to see them again in the list.
 
-To stop everything properly, right clic on the server name and stop it. Then 
-stop Jade through the GUI by clic on "File > Shut down Agent Platform".
+To stop everything properly, right click on the server name and stop it. Then 
+stop Jade through the GUI by clicking on "File > Shut down Agent Platform".
 
 
 
