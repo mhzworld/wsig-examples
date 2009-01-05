@@ -98,8 +98,8 @@ STEP 4 - ADDING THE SERVER
 Switch on JavaEE perspective. Select the wsig-examples project and create the 
 application's Debug Configuration (Debug As > Debug on server) : choose 
 "Manually define a new server" of type "Apache > Tomcat v5.5 Server", tick 
-"Always use this server when running this project", and clic Next. Fill in the 
-installation path of Tomcat, "/usr/share/tomcat5.5" on Ubuntu 7.10, and clic 
+"Always use this server when running this project", and click on Next. Fill in the 
+installation path of Tomcat, "/usr/share/tomcat5.5" on Ubuntu 7.10, and click on 
 Next. Add wsig-examples to the projects configured for this server, and finish.
 
 In projects view, a new project appeared : "Servers". It contains a directory 
