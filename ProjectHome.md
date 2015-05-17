@@ -1,0 +1,1 @@
+Provides a detailed example of web services with JADE and the WSIG library using the Eclipse development environment.
